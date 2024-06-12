@@ -1,0 +1,25 @@
+<h1>몽고DB CRUD</h1>
+이름: <input type="text" id="name" name="name">,
+나이: <input type="text" id="age" name="age">
+<button onclick="javascript:fSave();">저장하기</button>
+
+<script>
+const $ = document.querySelector.bind(document);
+async function fSave() {
+    let data = {
+        name: $('#name').value,
+        age: $('#age').value
+    }
+    alert(`이걸 저장하려해: ${JSON.stringify(data)}`);
+    const url = '/api/post'
+    const response = await fetch(url,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    });
+    const json = await response.json();
+    console.log(JSON.stringify(json));
+}
+</script>
